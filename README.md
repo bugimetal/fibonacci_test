@@ -6,3 +6,7 @@
 **Packages:**
   * go get github.com/Sirupsen/logrus
   * go get goji.io
+
+**Run:**
+    * go build
+    * ./fibonacci_test
