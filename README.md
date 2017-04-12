@@ -8,5 +8,5 @@
   * go get goji.io
 
 **Run:**
-    * go build
-    * ./fibonacci_test
+  * go build
+  * ./fibonacci_test
