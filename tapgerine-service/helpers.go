@@ -3,9 +3,10 @@ package tapgerine
 import (
 	"encoding/json"
 	"errors"
-	"goji.io/pat"
 	"net/http"
 	"strconv"
+
+	"goji.io/pat"
 )
 
 func sendResponseWithStatus(w http.ResponseWriter, resp interface{}, statusCode int, headers ...map[string]string) {
@@ -24,7 +25,7 @@ func sendResponseWithStatus(w http.ResponseWriter, resp interface{}, statusCode 
 	}
 }
 
-func getNumberFromRequest(r *http.Request) (int, error) {
+func getNumberFromRequest(r *http.Request) (int64, error) {
 	number := pat.Param(r, "number")
 	result, err := strconv.Atoi(number)
 	if err != nil {
@@ -33,5 +34,5 @@ func getNumberFromRequest(r *http.Request) (int, error) {
 	if result <= 0 {
 		return 0, errors.New("Number should be greater that 0")
 	}
-	return result, nil
+	return int64(result), nil
 }

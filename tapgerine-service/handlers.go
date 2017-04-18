@@ -3,11 +3,12 @@ package tapgerine
 import (
 	"net/http"
 
-	"tapgerine/tapgerine-service/fibonacci"
+	"fibonacci_test/tapgerine-service/fibonacci"
 )
 
 var (
-	cache = fibonacci.CreateCache()
+	cache       = fibonacci.CreateCache()
+	cacheMatrix = fibonacci.CreateMatrixCache()
 )
 
 func fibonacciHandler(w http.ResponseWriter, r *http.Request) {
@@ -16,9 +17,10 @@ func fibonacciHandler(w http.ResponseWriter, r *http.Request) {
 		sendResponseWithStatus(w, nil, http.StatusBadRequest)
 		return
 	}
-	result := fibonacci.WithCache(number, cache)
 
-	sendResponseWithStatus(w, fibonacciResponse{N: number, Value: result}, http.StatusOK)
+	result := fibonacci.Qmatrix(int(number), cacheMatrix)
+
+	sendResponseWithStatus(w, result.String(), http.StatusOK)
 }
 
 func fibonacciEvenSumHandler(w http.ResponseWriter, r *http.Request) {
@@ -28,7 +30,7 @@ func fibonacciEvenSumHandler(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	sequence := fibonacci.Sequence(number)
+	sequence := fibonacci.Sequence(int(number))
 	var result int
 	for _, item := range sequence {
 		if item%2 == 0 {
@@ -36,5 +38,5 @@ func fibonacciEvenSumHandler(w http.ResponseWriter, r *http.Request) {
 		}
 	}
 
-	sendResponseWithStatus(w, fibonacciResponse{N: number, Value: result}, http.StatusOK)
+	sendResponseWithStatus(w, fibonacciResponse{N: number, Value: string(result)}, http.StatusOK)
 }

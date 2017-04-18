@@ -5,6 +5,8 @@ package fibonacci
 import (
 	"testing"
 
+	"math/big"
+
 	"github.com/stretchr/testify/assert"
 )
 
@@ -30,4 +32,13 @@ func Test_WithCache(t *testing.T) {
 	assert.Equal(t, WithCache(30, cache), 832040)
 	assert.Equal(t, WithCache(92, cache), 7540113804746346429)
 	assert.Equal(t, WithCache(30, cache), 832040)
+}
+
+func Test_Qmatrix(t *testing.T) {
+	cache := CreateMatrixCache()
+	assert.Equal(t, Qmatrix(10, cache), big.NewInt(55))
+	assert.Equal(t, Qmatrix(20, cache), big.NewInt(6765))
+	assert.Equal(t, Qmatrix(30, cache), big.NewInt(832040))
+	assert.Equal(t, Qmatrix(92, cache), big.NewInt(7540113804746346429))
+	assert.Equal(t, Qmatrix(30, cache), big.NewInt(832040))
 }

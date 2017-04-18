@@ -4,7 +4,7 @@ import (
 	"net/http"
 	"runtime"
 
-	"tapgerine/tapgerine-service"
+	"fibonacci_test/tapgerine-service"
 
 	"github.com/Sirupsen/logrus"
 )
